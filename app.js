@@ -16,9 +16,12 @@ app.use(helmet());
 mongoose.connect(config.db_connection, {useUnifiedTopology: true, useNewUrlParser: true })
     .then(()=>generalDebug('Connected to DB!'))
     .catch((err) => generalDebug('Could not connect to DB...', err));
-    
-port = process.env.PORT || 3000;
 
-app.listen(port, ()=> {
+
+port = 3000;
+maxPendingConnections = 511;
+host = '127.0.0.1';
+
+app.listen(port, host, maxPendingConnections, ()=> {
     generalDebug(`Listening to port ${port}`);
 });
